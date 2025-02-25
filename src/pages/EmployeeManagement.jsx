@@ -63,7 +63,7 @@ const EmployeePage = () => {
 
   return (
     <div className='empmgmt'>
-      <Typography variant="h4" gutterBottom>Employee Management</Typography>
+      <Typography variant="h4" gutterBottom sx={{ color: 'black', fontWeight: 'bold', margin: '0 100px'}}>Employee Management</Typography>
       <section>
         <Button variant="contained" color="primary" onClick={() => setIsFormOpen(true)}>
           Add Employee

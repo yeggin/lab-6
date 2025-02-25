@@ -12,15 +12,14 @@ function App() {
     <TitleProvider>
       <Router>
         <Header />
-        
+        <div className='container'>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/employee-management" element={<EmployeeManagement />} />
 
           </Routes>
-      <hr/>
-      <hr/>    
-      <hr/> 
+          </div>
+
       <Footer />
       </Router>
     </TitleProvider>

@@ -12,7 +12,9 @@ section {
 .empmgmt {
     display: flex;
     gap: 20px;
-    justify-content: center;
+    justify-content: left;
+    margin: 30px auto;
     flex-wrap: wrap;
     margin-top: 6rem;
   }
+
