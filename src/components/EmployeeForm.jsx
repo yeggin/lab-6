@@ -26,7 +26,11 @@ const EmployeeForm = ({ employee, onSubmit, onClose, open }) => {
   }, [employee]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -63,6 +67,16 @@ const EmployeeForm = ({ employee, onSubmit, onClose, open }) => {
             fullWidth
             margin="normal"
           />
+          <TextField
+            name="birthdate"
+            label="Birthdate"
+            type="date"
+            value={formData.birthdate || ""}
+            onChange={handleChange}
+            variant="outlined"
+            size="small"
+            sx={{ mr: 1 }}
+          />  
           <TextField
             name="salary"
             label="Salary"

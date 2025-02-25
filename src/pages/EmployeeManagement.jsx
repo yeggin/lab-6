@@ -27,8 +27,12 @@ const EmployeePage = () => {
   const handleAddEmployee = async (employee) => {
     try {
       const newEmployee = await addEmployee(employee);
-      setEmployees((prevEmployees) => [...prevEmployees, newEmployee]);
+      setEmployees((prevEmployees) => {
+        const updatedEmployees = [...prevEmployees, newEmployee];
+        return updatedEmployees;
+      });
       setIsFormOpen(false);
+
     } catch (error) {
       console.error('Error adding employee:', error);
     }

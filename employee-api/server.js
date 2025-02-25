@@ -58,7 +58,7 @@ app.get('/api/employeeAPI', (req, res) => {
   });
 });
 
-app.post('/api/employeeAPI', (req, res) => {
+app.post('/api/employeeAPI/:id', (req, res) => {
   const employee = req.body;
   const sql = 'INSERT INTO employees (first_name, last_name, email, birthdate, salary) VALUES (?, ?, ?, ?, ?)';
   db.query(sql, [employee.first_name, employee.last_name, employee.email, employee.birthdate, employee.salary], (err, result) => {
