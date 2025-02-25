@@ -19,10 +19,11 @@ const EmployeeList = ({ employees, onEdit, onDelete}) => {
             </TableHead>
             <TableBody>
                 {employees.map((employee) => (
-                    <TableRow key={employee.id}>
+                    <TableRow key={employee.employee_id}>
                         <TableCell>{employee.first_name}</TableCell>
                         <TableCell>{employee.last_name}</TableCell>
                         <TableCell>{employee.email}</TableCell>
+                        <TableCell>{employee.birthdate}</TableCell>
                         <TableCell>{employee.salary}</TableCell>
                         <TableCell>
                         <Button 

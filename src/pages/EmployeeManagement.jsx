@@ -3,7 +3,7 @@ import { Container, Typography, Button } from '@mui/material';
 import EmployeeList from '../components/EmployeeList';
 import EmployeeForm from '../components/EmployeeForm';
 import { getEmployees, addEmployee, updateEmployee, deleteEmployee } from '../api/employeeApi';
-import '../styles/EmpMgmt.css'
+import '../styles/EmpMgmt.css';
 
 const EmployeePage = () => {
   const [employees, setEmployees] = useState([]);
@@ -21,47 +21,47 @@ const EmployeePage = () => {
       setEmployees(data);
     } catch (error) {
       console.error('Error fetching employees:', error);
-      // Handle error (e.g., show error message to user)
     }
   };
 
   const handleAddEmployee = async (employee) => {
     try {
       const newEmployee = await addEmployee(employee);
-      setEmployees([...employees, newEmployee]);
+      setEmployees((prevEmployees) => [...prevEmployees, newEmployee]);
       setIsFormOpen(false);
     } catch (error) {
       console.error('Error adding employee:', error);
-      // Handle error
     }
   };
-  
 
   const handleUpdateEmployee = async (updatedEmployee) => {
     try {
       const result = await updateEmployee(updatedEmployee);
-      setEmployees(employees.map(emp => emp.id === result.id ? result : emp));
+      setEmployees((prevEmployees) =>
+        prevEmployees.map((emp) =>
+          emp.employee_id === result.employee.employee_id ? result.employee : emp
+        )
+      );
       setIsFormOpen(false);
       setSelectedEmployee(null);
     } catch (error) {
       console.error('Error updating employee:', error);
-      // Handle error
     }
   };
 
-  const handleDeleteEmployee = async (id) => {
+  const handleDeleteEmployee = async (employee) => {
     try {
-      await deleteEmployee(id);
-      setEmployees(employees.filter(emp => emp.id !== id));
+      await deleteEmployee(employee);
+      setEmployees((prevEmployees) => {const updatedEmployees = prevEmployees.filter(emp => emp.employee_id !== employee.employee_id);
       setIsDeleteModalOpen(false);
+      return updatedEmployees;
+    });
     } catch (error) {
       console.error('Error deleting employee:', error);
-      // Handle error
     }
   };
 
   return (
-    <>
     <div className='empmgmt'>
       <Typography variant="h4" gutterBottom>Employee Management</Typography>
       <section>
@@ -75,12 +75,12 @@ const EmployeePage = () => {
             setIsFormOpen(true);
           }}
           onDelete={(employee) => {
+            handleDeleteEmployee(employee)
             setSelectedEmployee(employee);
             setIsDeleteModalOpen(true);
           }}
         />
       </section>
-      </div>
       <EmployeeForm 
         open={isFormOpen}
         employee={selectedEmployee}
@@ -89,9 +89,8 @@ const EmployeePage = () => {
           setSelectedEmployee(null);
         }}
         onSubmit={selectedEmployee ? handleUpdateEmployee : handleAddEmployee}
-        />
-    </>  
-    
+      />
+    </div>
   );
 };
 
