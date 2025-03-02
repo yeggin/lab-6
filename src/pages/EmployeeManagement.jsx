@@ -4,13 +4,16 @@ import EmployeeList from '../components/EmployeeList';
 import EmployeeForm from '../components/EmployeeForm';
 import { getEmployees, addEmployee, updateEmployee, deleteEmployee } from '../api/employeeApi';
 import '../styles/EmpMgmt.css';
+import { AuthenticatedComponent } from '@asgardeo/auth-react';
+import { useAuthContext } from '@asgardeo/auth-react';
+
 
 const EmployeePage = () => {
   const [employees, setEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
+  
   useEffect(() => {
     fetchEmployees();
   }, []);
@@ -66,6 +69,7 @@ const EmployeePage = () => {
   };
 
   return (
+    
     <div className='empmgmt'>
       <Typography variant="h4" gutterBottom sx={{ color: 'black', fontWeight: 'bold', margin: '0 100px'}}>Employee Management</Typography>
       <section>
